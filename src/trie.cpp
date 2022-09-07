@@ -71,13 +71,17 @@ void dfs(prefix_node& start, size_t limit, vector<string>& words) {
   if (start.node->is_word && words.size() < limit)
     words.push_back(start.prefix_string);
 
-  if (words.size() == limit) {
+  if (words.size() >= limit) {
     return;
   }
 
   auto& children = start.node->children;
 
   for (auto iter = children.begin(); iter != children.end(); iter++) {
+    if (words.size() >= limit) {
+      return;
+    }
+
     auto trie_node = iter->second;
     auto prefix_string = start.prefix_string + iter->first;
     auto next = prefix_node{trie_node, prefix_string};
