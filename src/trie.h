@@ -19,7 +19,7 @@ struct prefix_node {
 
 class trie {
   node* root;
-  prefix_node* get_prefix_node(std::string word);
+  prefix_node get_prefix_node(std::string word);
 
  public:
   trie(const char* dump_file_path);

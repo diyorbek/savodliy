@@ -51,51 +51,50 @@ bool trie::find(string word) {
   return current->is_word;
 }
 
-prefix_node* trie::get_prefix_node(string word) {
+prefix_node trie::get_prefix_node(string word) {
   auto current = root;
   string prefix;
 
   for (char c : word) {
     if (!current->children.count(c)) {
-      return current == root ? nullptr : new prefix_node{current, prefix};
+      return prefix_node{current == root ? nullptr : current, prefix};
     }
 
     current = current->children[c];
     prefix += c;
   }
 
-  return new prefix_node{current, prefix};
+  return prefix_node{current, prefix};
+}
+
+void dfs(prefix_node& start, size_t limit, vector<string>& words) {
+  if (start.node->is_word && words.size() < limit)
+    words.push_back(start.prefix_string);
+
+  if (words.size() == limit) {
+    return;
+  }
+
+  auto& children = start.node->children;
+
+  for (auto iter = children.begin(); iter != children.end(); iter++) {
+    auto trie_node = iter->second;
+    auto prefix_string = start.prefix_string + iter->first;
+    auto next = prefix_node{trie_node, prefix_string};
+
+    dfs(next, limit, words);
+  }
 }
 
 vector<string> trie::starts_with(string word, size_t limit) {
   auto prefix = get_prefix_node(word);
 
-  if (!prefix)
+  if (!prefix.node)
     return {};
 
   vector<string> words;
-  stack<prefix_node*> node_stack;
-  node_stack.push(prefix);
 
-  while (node_stack.empty() == false) {
-    prefix_node* pref_node = node_stack.top();
-    node_stack.pop();
-
-    if (pref_node->node->is_word)
-      words.push_back(pref_node->prefix_string);
-
-    if (words.size() == limit)
-      break;
-
-    auto& children = pref_node->node->children;
-
-    for (auto iter = children.rbegin(); iter != children.rend(); iter++) {
-      auto trie_node = iter->second;
-      auto prefix_string = pref_node->prefix_string + iter->first;
-
-      node_stack.push(new prefix_node{trie_node, prefix_string});
-    }
-  }
+  dfs(prefix, limit, words);
 
   return words;
 }
