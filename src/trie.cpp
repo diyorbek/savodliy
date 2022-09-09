@@ -8,19 +8,35 @@
 #include "trie.h"
 
 using std::ifstream;
+using std::istream;
+using std::noskipws;
+using std::ofstream;
+using std::ostream;
 using std::stack;
 using std::string;
+using std::to_string;
 using std::vector;
 
-node::node(char c) : letter(c) {}
+node::node(char c) : letter(c), is_word(false) {}
+node::~node() {
+  for (auto it : children) {
+    delete it.second;
+  }
+}
 
-trie::trie(const char* dump_file_path) : root(new node('\0')) {
-  ifstream dump(dump_file_path);
+trie::trie() : root(new node('\0')) {}
+
+trie::trie(const char* word_list_file_path) : root(new node('\0')) {
+  ifstream dump(word_list_file_path);
   string word;
 
   while (dump >> word) {
     insert(word);
   }
+}
+
+trie::~trie() {
+  delete root;
 }
 
 void trie::insert(string word) {
@@ -101,4 +117,70 @@ vector<string> trie::starts_with(string word, size_t limit) {
   dfs(prefix, limit, words);
 
   return words;
+}
+
+void trie::dump_to_file(const char* dump_file_path) {
+  ofstream dump_file;
+  dump_file.open(dump_file_path);
+  serialize(root, dump_file);
+}
+
+void trie::read_from_dump_file(const char* dump_file_path) {
+  ifstream dump_file(dump_file_path);
+  delete root;
+  root = deserialize(dump_file);
+}
+
+ushort trie::serialize(node* root, ostream& out) {
+  if (root->letter != 0) {
+    out << root->letter;
+
+    if (root->is_word) {
+      out << '+';
+    }
+  }
+
+  ushort r = 0;
+  ushort i = 1;
+  ushort n = root->children.size();
+
+  for (auto it : root->children) {
+    r = serialize(it.second, out);
+
+    if (i++ < n)
+      out << r;
+  }
+
+  return r + 1;
+}
+
+node* trie::deserialize(istream& in) {
+  node* root = new node(0);
+  stack<node*> s;
+  s.push(root);
+  char c;
+
+  while (in >> noskipws >> c) {
+    int pop_count = 0;
+
+    while (c >= '0' && c <= '9') {
+      pop_count = pop_count * 10 + (c - '0');
+      in >> noskipws >> c;
+    }
+
+    while (pop_count--) {
+      s.pop();
+    }
+
+    if (c == '+') {
+      s.top()->is_word = true;
+      continue;
+    }
+
+    auto new_node = new node(c);
+    s.top()->children[c] = new_node;
+    s.push(new_node);
+  }
+
+  return root;
 }
