@@ -16,7 +16,7 @@ struct node {
 };
 
 struct prefix_node {
-  node* node;
+  node* letter_node;
   std::string prefix_string;
 };
 

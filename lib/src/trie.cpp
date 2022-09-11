@@ -84,14 +84,14 @@ prefix_node trie::get_prefix_node(string word) {
 }
 
 void dfs(prefix_node& start, size_t limit, vector<string>& words) {
-  if (start.node->is_word && words.size() < limit)
+  if (start.letter_node->is_word && words.size() < limit)
     words.push_back(start.prefix_string);
 
   if (words.size() >= limit) {
     return;
   }
 
-  auto& children = start.node->children;
+  auto& children = start.letter_node->children;
 
   for (auto iter = children.begin(); iter != children.end(); iter++) {
     if (words.size() >= limit) {
@@ -109,7 +109,7 @@ void dfs(prefix_node& start, size_t limit, vector<string>& words) {
 vector<string> trie::starts_with(string word, size_t limit) {
   auto prefix = get_prefix_node(word);
 
-  if (!prefix.node)
+  if (!prefix.letter_node)
     return {};
 
   vector<string> words;
