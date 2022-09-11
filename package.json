@@ -1,0 +1,12 @@
+{
+  "name": "typeahead",
+  "version": "1.0.0",
+  "repository": "https://github.com/diyorbek/typeahead.git",
+  "author": "Diyorbek Sadullaev <diyorbek3377@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "lib",
+    "server"
+  ]
+}
