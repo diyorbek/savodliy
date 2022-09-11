@@ -2,7 +2,7 @@
 
 A simple server which checks words with Uzbek dictionary, gives suggestions or adds words to the dictionary.
 
-The API is publicly available.
+The API is publicly available at this domain: `typeahead.spider.uz`
 
 ## Check word
 
