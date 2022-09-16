@@ -1,11 +1,19 @@
 const express = require("express");
 const { dictionary } = require("./dictionary");
+const { getCleanWords } = require("./utils");
 
 const { json, urlencoded } = express;
 const server = express();
 
 server.use(json());
 server.use(urlencoded({ extended: true }));
+
+server.all("/*", function (_req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 server.get("/check", (req, res) => {
   const { word } = req.query;
@@ -68,6 +76,23 @@ server.post("/suggest", (req, res) => {
   } catch (error) {
     console.log(error);
 
+    res.status(500);
+    res.json("Server error");
+  }
+});
+
+server.post("/check-text", (req, res) => {
+  try {
+    const { text } = req.body;
+    const words = getCleanWords(text);
+    const incorrectWords = words.filter(
+      (word) => !dictionary.find(word.toLowerCase())
+    );
+    const uniqueWords = [...new Set(incorrectWords)];
+
+    res.json(uniqueWords);
+  } catch (error) {
+    console.dir(error);
     res.status(500);
     res.json("Server error");
   }

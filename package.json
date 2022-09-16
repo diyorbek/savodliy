@@ -8,5 +8,8 @@
   "workspaces": [
     "lib",
     "server"
-  ]
+  ],
+  "scripts": {
+    "start": "node ./server/index.js"
+  }
 }
