@@ -10,6 +10,6 @@
     "server"
   ],
   "scripts": {
-    "start": "node ./server/index.js"
+    "start": "yarn workspace server start"
   }
 }
