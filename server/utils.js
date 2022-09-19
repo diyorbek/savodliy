@@ -1,5 +1,10 @@
+const pureWordExp = /[a-zЀ-ӿ]+(\S*[a-zЀ-ӿ]+)?/gi;
+const wordCharsExp = /[ʻʼ’'`´‘a-z\u0400-\u04FF\-]+/gi;
+
 function getCleanWords(text) {
-  return text.match(/[ʻʼ’'`´‘a-z\u0400-\u04FF\-]+/gi) || [];
+  const words = text.match(pureWordExp) || [];
+
+  return words;
 }
 
 module.exports = {
