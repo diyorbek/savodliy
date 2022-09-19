@@ -7,6 +7,7 @@ const server = express();
 
 server.use(json());
 server.use(urlencoded({ extended: true }));
+server.use(express.static("public"));
 
 server.all("/*", function (_req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
