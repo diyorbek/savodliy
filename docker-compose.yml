@@ -1,0 +1,10 @@
+version: '3'
+services:
+  node:
+    restart: always
+    build: .
+    command: bash -c "yarn install && yarn start"
+    ports:
+      - 127.0.0.1:5566:5566
+    volumes:
+      - ./:/app
