@@ -1,0 +1,64 @@
+#editor {
+  height: 80vh;
+  min-height: 80vh;
+}
+
+#editor .ql-editor {
+  height: 90%;
+}
+
+#editor .ql-editor.ql-blank::before {
+  color: rgba(0, 0, 0, 0.6);
+  content: "Shu yerga yozing...";
+  font-style: italic;
+  pointer-events: none;
+  position: absolute;
+}
+
+#editor * {
+  outline: none;
+}
+
+[data-error] {
+  display: inline;
+  background-color: rgba(230, 40, 40, 0.08);
+  border-bottom: 2px solid rgba(255, 0, 0, 0.5);
+}
+
+[data-error]:hover {
+  background-color: rgba(230, 40, 40, 0.3);
+}
+
+#suggestions {
+  display: none;
+  min-width: 120px;
+}
+
+#suggestions:empty::before {
+  content: "Loading...";
+  padding: 4px;
+}
+
+#suggestions.show {
+  display: block;
+}
+
+#suggestions .suggestion {
+  cursor: pointer;
+  padding: 4px;
+}
+
+#suggestions .suggestion:hover {
+  background-color: gray;
+}
+
+#suggestions .suggestion:not(:last-child) {
+  border-bottom: 1px solid gray;
+}
+
+#suggestions p {
+  margin: 0;
+  padding: 4px;
+  color: gray;
+  text-align: center;
+}

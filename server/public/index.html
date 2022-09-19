@@ -4,90 +4,107 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Savodliy</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet" />
-    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <style>
-      [data-error] {
-        display: inline;
-        background-color: rgba(230, 40, 40, 0.08);
-        border-bottom: 2px solid rgba(255, 0, 0, 0.5);
-      }
-
-      [data-error]:hover {
-        background-color: rgba(230, 40, 40, 0.3);
-      }
-
-      #suggestions {
-        display: none;
-        min-width: 120px;
-      }
-
-      #suggestions:empty::before {
-        content: "Loading...";
-        padding: 4px;
-      }
-
-      #suggestions.show {
-        display: block;
-      }
-
-      #suggestions .suggestion {
-        cursor: pointer;
-        padding: 4px;
-      }
-
-      #suggestions .suggestion:hover {
-        background-color: gray;
-      }
-
-      #suggestions .suggestion:not(:last-child) {
-        border-bottom: 1px solid gray;
-      }
-
-      #suggestions p {
-        margin: 0;
-        padding: 4px;
-        color: gray;
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <div class="container vh-100 position-relative p-0">
-      <div id="editor">
-        Tan olish kerakki, hech qaysi to‘lov xizmati bunday aniq va sodda dastur
-        interfeysiga ega emas. Ilovaning asosiy menyusida hamma narsa keng
-        foydalanuvchi uchun juda aniq jihozlangan: kartalarni qo‘shish dastur
-        funksiyalari ustunining pastki qismida ham, «barcha xaritalar»ning
-        asosiy qismida ham joylashgan. Ushbu tugmani bosganingizda,
-        foydalanuvchi bank kartalarini qo‘shish uchun qulay imkoniyatga ega
-        bo‘ladi. Identifikatsiya shaklining oson o‘tishi. Darhaqiqat,
-        identifikatsiyadan o‘tish uchun siz pasport ma’lumotlarini to‘g‘ri
-        kiritishingiz va 1pay.uz saytda o‘qilishi mumkin bo‘lgan Pay Way dasturi
-        uchun belgilangan qoidalarga muvofiq shaxsning fotosuratini olishingiz
-        kerak. Identifikatsiyadan o‘tgandan so‘ng, ushbu dasturda juda tez
-        ommalashib borayotgan xizmatlar mavjud bo‘ladi - xalqaro banking va p2p
-        o‘tkazmalari, elektron hamyonlarni to‘ldirish, shuningdek MDH
-        mamlakatlari va qo‘shni davlatlarning aloqa va Internet kompaniyalari
-        xizmatlari uchun to‘lovlar shular jumlasidandir. Aynan shunday keng
-        to‘lov imkoniyatlari ko‘plab odamlarni o‘ziga jalb qiladi. Axir
-        ko‘pchilik boshqa mamlakatlarda oilalari va yaqin odamlari bor va
-        ba’zida ular, masalan, tug‘ilgan kun yoki boshqa muhim sana munosabati
-        bilan kartaga ro‘yxatdan o‘tish shaklida kutilmagan sovg‘a qilishni
-        xohlashadi. 1999-yilning yilning журналистиканинг uchidan
+    <div id="header">
+      <div class="container">
+        <h1>savodli<span>y</span></h1>
       </div>
+      <div class="links">
+        <button
+          type="button"
+          class="btn btn-sm btn-light"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Proyekt haqida
+        </button>
 
-      <div
-        id="suggestions"
-        class="bg-dark text-light shadow rounded-lg position-absolute overflow-hidden"
-      ></div>
+        <a
+          href="https://github.com/diyorbek/savodliy"
+          class="btn btn-sm btn-light d-flex align-items-center"
+          target="_blank"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            class="mr-1"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+            ></path>
+          </svg>
+          Github
+        </a>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Proyekt haqida
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Savodliy - o'zbek tilidagi matnlarni imloviy xatolarga
+                tekshiruvchi dastur. Dastur serveri hamma uchun ochiq va siz ham
+                undan o'z proyektlaringizda foydalanishingiz mumkin. Proyekt
+                hozircha beta versiyada ishlamoqda. Shuning uchun kamchiliklari
+                yetarlicha. Agar proyektga o'z hissangizni qo'shishni
+                istasangiz, Github'da gi repozitoriyda "Issue" ochishingiz yoki
+                PR jo'natishingiz mumkin.
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Yopish
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-2">
+      <div class="container position-relative">
+        <div id="editor"></div>
+
+        <div
+          id="suggestions"
+          class="bg-dark text-light shadow rounded-lg position-absolute overflow-hidden"
+        ></div>
+      </div>
     </div>
 
     <script
@@ -96,15 +113,11 @@
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>

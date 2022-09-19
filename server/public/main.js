@@ -17,43 +17,11 @@ const quill = new Quill("#editor", {
   },
 });
 
-const markerContainer = document.getElementById("markers");
-
-function styleMarker(element, params) {
-  for (let param in params) {
-    element.style[param] = params[param] + "px";
-  }
-}
-
-function createMarker() {
-  const element = document.createElement("div");
-  element.className = "marker";
-  return element;
-}
-
-function putMarkers(boundaries) {
-  boundaries.forEach((boundary) => {
-    const marker = createMarker();
-
-    styleMarker(marker, boundary);
-    markerContainer.appendChild(marker);
-  });
-}
-
-function getBoundaries(positions) {
-  return positions.map(([start, length]) => quill.getBounds(start, length));
-}
-
 function getPositions(text, word) {
   return [...text.matchAll(new RegExp(`${word}\\W`, "gi"))].map(({ index }) => [
     index,
     word.length,
   ]);
-}
-
-function getWordBoundaries(text, words) {
-  const positions = words.map((word) => getPositions(text, word)).flat();
-  return getBoundaries(positions);
 }
 
 function getWordPositions(text, words) {
