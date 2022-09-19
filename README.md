@@ -1,8 +1,8 @@
-# Typeahead
+# Savodliy
 
 A simple server which checks words with Uzbek dictionary, gives suggestions or adds words to the dictionary.
 
-The API is publicly available at this domain: `typeahead.spider.uz`
+The API is publicly available at this domain: `savodliy.spider.uz`
 
 ## Check word
 
